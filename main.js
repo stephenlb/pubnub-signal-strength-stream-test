@@ -1,5 +1,4 @@
-(async ()=>{
-'use strict';
+(async ()=>{ 'use strict';
 
 const testChannel = '123-testing';
 const pubnub = PubNub({
@@ -9,14 +8,14 @@ const pubnub = PubNub({
 });
 
 // Publish Loop
-setInterval( async () => log({publishSuccess: !!await publish()}), 1000 );
+setInterval( async () => log(await publish()), 1000 );
 
 // Start Subscribe
 subscribe(testChannel);
 
 // Subscribe Messaage Receiver
 function receiver(message) {
-    log({received: new Date(message.timestamp)});
+    log({Rx: new Date(message.timestamp)});
 }
 
 // Log output
@@ -38,7 +37,7 @@ async function publish() {
         channel:  testChannel,
         message:  message,
         metadata: message,
-    });
+    }) ? {Tx: new Date(message.timestamp)} : false;
 }
 
 })();
