@@ -9,16 +9,22 @@ const pubnub = PubNub({
 });
 
 // Publish Loop
-setInterval( publish, 1000 );
+setInterval( async () => log({publishSuccess: !!await publish()}), 1000 );
 
 // Start Subscribe
 subscribe(testChannel);
 
 // Subscribe Messaage Receiver
 function receiver(message) {
-    let string = JSON.stringify(message);
-    console.log(message);
-    document.querySelector('#out').innerHTML = string;
+    log({received: new Date(message.timestamp)});
+}
+
+// Log output
+log.count = 1;
+function log(out) {
+    console.log(out);
+    document.querySelector('#out').innerHTML +=
+        `<div>${log.count++}: ${JSON.stringify(out)}</div>`;
 }
 
 async function subscribe(channel) {
