@@ -1,4 +1,4 @@
-(async ()=>{ 'use strict';
+(async ()=>{
 
 const testChannel = '123-testing';
 const pubnub = PubNub({

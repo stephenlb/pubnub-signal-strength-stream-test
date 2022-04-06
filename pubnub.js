@@ -4,7 +4,6 @@ const PubNub = (setup) => {
 };
 
 (async ()=>{ 
-'use strict';
 
 const defaultSubkey  = 'demo';
 const defaultPubkey  = 'demo';
